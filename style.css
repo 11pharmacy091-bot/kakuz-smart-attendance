@@ -1,0 +1,168 @@
+/* ====================================== KAKUZ SMART ATTENDANCE GENERAL SETTINGS ====================================== */
+
+{ margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body { font-family: Arial, sans-serif; background: #0b1120; color: white; line-height: 1.6; }
+
+[hidden] { display: none !important; }
+
+section { padding: 60px 8%; scroll-margin-top: 20px; }
+
+h2 { color: #38bdf8; margin-bottom: 20px; }
+
+p { color: #d1d5db; }
+
+/* ====================================== HEADER AND NAVIGATION ====================================== */
+
+header { padding: 20px 8%; background: #111827; border-bottom: 1px solid #263449; }
+
+nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+
+nav h2 { color: #38bdf8; font-size: 25px; letter-spacing: 2px; margin: 0; }
+
+nav div { display: flex; gap: 25px; flex-wrap: wrap; }
+
+nav a { color: white; text-decoration: none; font-size: 15px; transition: 0.3s; }
+
+nav a:hover { color: #38bdf8; }
+
+/* ====================================== BUTTONS ====================================== */
+
+button { background: #0284c7; color: white; border: none; padding: 14px 25px; margin-top: 15px; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: bold; transition: 0.3s; }
+
+button:hover { background: #0369a1; transform: translateY(-2px); }
+
+button:active { transform: scale(0.98); }
+
+/* ====================================== HERO SECTION ====================================== */
+
+.hero { text-align: center; padding: 110px 20px; }
+
+.hero h1 { font-size: 42px; margin-bottom: 20px; color: #38bdf8; }
+
+.hero p { color: #9ca3af; max-width: 600px; margin: auto; line-height: 1.8; }
+
+/* ====================================== ABOUT SECTION ====================================== */
+
+#about { text-align: center; background: #111827; }
+
+#about h2 { margin-bottom: 20px; }
+
+#about h3 { color: #38bdf8; margin-top: 30px; margin-bottom: 15px; }
+
+#about p { max-width: 750px; margin: 12px auto; }
+
+/* ====================================== LOGIN SECTION ====================================== */
+
+#login, #registration { text-align: center; }
+
+#login h2, #registration h2 { margin-bottom: 30px; }
+
+.login-box { background: #172033; max-width: 420px; padding: 30px; margin: 25px auto; border-radius: 12px; border: 1px solid #263449; transition: 0.3s; }
+
+.login-box:hover { border-color: #38bdf8; }
+
+.login-box h3 { color: #38bdf8; margin-bottom: 20px; }
+
+.login-box p { margin-top: 15px; }
+
+/* ====================================== INPUT FIELDS ====================================== */
+
+input, select, textarea { display: block; width: 100%; padding: 14px; margin: 15px 0; border: 1px solid #263449; border-radius: 7px; background: #0b1120; color: white; font-size: 15px; outline: none; }
+
+input:focus, select:focus, textarea:focus { border-color: #38bdf8; box-shadow: 0 0 5px rgba(56, 189, 248, 0.3); }
+
+input::placeholder, textarea::placeholder { color: #9ca3af; }
+
+select option { background: #172033; color: white; }
+
+input[readonly] { opacity: 0.8; cursor: not-allowed; }
+
+.login-box button { width: 100%; }
+
+/* ====================================== DASHBOARDS ====================================== */
+
+#student-dashboard, #lecturer-dashboard, #admin-dashboard { padding: 50px 8%; text-align: center; background: #0b1120; color: white; }
+
+#student-dashboard h2, #lecturer-dashboard h2, #admin-dashboard h2 { color: #38bdf8; margin-bottom: 30px; }
+
+/* ====================================== DASHBOARD CARDS ====================================== */
+
+.dashboard-card { background: #172033; border: 1px solid #263449; padding: 25px; border-radius: 12px; margin: 20px auto; max-width: 800px; text-align: left; overflow: hidden; }
+
+.dashboard-card h3 { color: #38bdf8; margin-bottom: 18px; }
+
+.dashboard-card p { margin: 12px 0; color: #d1d5db; }
+
+.dashboard-card button { width: 100%; }
+
+/* ====================================== STUDENT DASHBOARD ====================================== */
+
+#student-dashboard .dashboard-card { max-width: 700px; }
+
+#student-dashboard input { background: #0b1120; }
+
+/* ====================================== LECTURER DASHBOARD ====================================== */
+
+#lecturer-dashboard .dashboard-card { max-width: 850px; }
+
+/* ====================================== ADMIN DASHBOARD ====================================== */
+
+#admin-dashboard .dashboard-card { max-width: 850px; }
+
+#pending-lecturers, #admin-student-list { margin-top: 20px; }
+
+#pending-lecturers > div, #admin-student-list > div { background: #0b1120; border: 1px solid #263449; padding: 18px; border-radius: 8px; margin: 15px 0; }
+
+#pending-lecturers button { background: #16a34a; }
+
+#pending-lecturers button:hover { background: #15803d; }
+
+/* ====================================== QR SCANNER ====================================== */
+
+#qr-reader { width: 100%; max-width: 400px; margin: 20px auto; border-radius: 12px; overflow: hidden; }
+
+#scan-result { color: #38bdf8; text-align: center; margin-top: 15px; overflow-wrap: anywhere; }
+
+/* ====================================== QR CODE ====================================== */
+
+#qr-code { margin: 20px auto; display: flex; justify-content: center; }
+
+#qr-code img { border: 5px solid white; border-radius: 10px; }
+
+/* ====================================== ATTENDANCE TABLE ====================================== */
+
+.table-container { width: 100%; overflow-x: auto; }
+
+#attendance-table { width: 100%; min-width: 500px; border-collapse: collapse; margin-top: 20px; color: white; background: #0b1120; }
+
+#attendance-table th { background: #0369a1; color: white; padding: 14px; }
+
+#attendance-table td { padding: 12px; border: 1px solid #263449; text-align: center; }
+
+#attendance-table tr:nth-child(even) { background: #172033; }
+
+#total-students { color: #38bdf8; padding: 15px; margin-top: 20px; }
+
+/* ====================================== FOOTER ====================================== */
+
+footer { text-align: center; padding: 25px; color: #9ca3af; margin-top: 40px; background: #111827; border-top: 1px solid #263449; }
+
+/* ====================================== MOBILE RESPONSIVENESS ====================================== */
+
+@media (max-width: 768px) {
+
+header { padding: 20px; } nav { flex-direction: column; gap: 15px; } nav div { justify-content: center; gap: 15px; } .hero { padding: 70px 20px; } .hero h1 { font-size: 30px; } section { padding: 40px 15px; } .login-box { padding: 22px; } .dashboard-card { padding: 18px; } #student-dashboard, #lecturer-dashboard, #admin-dashboard { padding: 35px 15px; } #attendance-table { font-size: 12px; } #attendance-table th, #attendance-table td { padding: 8px 5px; } #qr-reader { max-width: 100%; } 
+
+}
+
+/* ====================================== SMALL MOBILE DEVICES ====================================== */
+
+@media (max-width: 400px) {
+
+.hero h1 { font-size: 25px; } nav h2 { font-size: 22px; } nav a { font-size: 13px; } button { font-size: 14px; padding: 12px 18px; } .login-box { padding: 18px; } 
+
+}
+

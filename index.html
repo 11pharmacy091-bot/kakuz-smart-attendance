@@ -1,1 +1,176 @@
-<title>KAKUZ Smart Attendance</title> <link rel="stylesheet" href="style.css"> <!-- HEADER --> <header> <nav> <h2>KAKUZ</h2> <div> <a href="#home">Home</a> <a href="#about">About</a> <a href="#login">Login</a> </div> </nav> </header> <main> <!-- HOME --> <section id="home" class="hero"> <h1>KAKUZ Smart Attendance</h1> <p>A smarter way to manage student attendance.</p> <button onclick="showLogin()">Get Started</button> </section> <!-- ABOUT --> <section id="about"> <h2>About Our System</h2> <p> KAKUZ Smart Attendance is a digital attendance management system designed to help educational institutions manage attendance records efficiently. </p> <h3>How It Works</h3> <p>Students can scan attendance QR codes.</p> <p>Lecturers can generate QR codes for their classes.</p> <p>Administrators can manage students and lecturers.</p> </section> <!-- LOGIN --> <section id="login"> <h2>Login to Your Account</h2> <!-- STUDENT LOGIN --> <div class="login-box"> <h3>Student Login</h3> <input type="email" id="student-login-id" placeholder="Enter your registered email" required > <input type="password" id="student-login-password" placeholder="Enter password" required > <button onclick="studentLogin()"> Student Login </button> </div> <!-- LECTURER LOGIN --> <div class="login-box"> <h3>Lecturer Login</h3> <input type="email" id="lecturer-login-email" placeholder="Enter lecturer email" required > <input type="password" id="lecturer-login-password" placeholder="Enter password" required > <button onclick="lecturerLogin()"> Lecturer Login </button> </div> <!-- ADMIN LOGIN --> <div class="login-box"> <h3>Admin Login</h3> <input type="email" id="admin-email" placeholder="Enter admin email" required > <input type="password" id="admin-password" placeholder="Enter password" required > <button onclick="adminLogin()"> Admin Login </button> </div> <p>Don't have an account?</p> <button onclick="showRegistration()"> Create New Account </button> </section> <!-- REGISTRATION --> <section id="registration" hidden> <h2>Create New Account</h2> <div class="login-box"> <label for="account-type">Account Type</label> <select id="account-type"> <option value="student">Student</option> <option value="lecturer">Lecturer</option> </select> <input type="text" id="register-name" placeholder="Full Name" required > <input type="text" id="register-id" placeholder="Matric Number / Staff ID" required > <input type="email" id="register-email" placeholder="Email Address" required > <input type="text" id="register-department" placeholder="Department" required > <input type="text" id="register-level" placeholder="Level (Students only)" > <input type="password" id="register-password" placeholder="Create Password" required > <input type="password" id="confirm-password" placeholder="Confirm Password" required > <button onclick="registerAccount()"> Register </button> <p id="register-message"></p> <button onclick="showLogin()"> Back to Login </button> </div> </section> <!-- STUDENT DASHBOARD --> <section id="student-dashboard" hidden> <h2>Student Dashboard</h2> <div class="dashboard-card"> <h3>Student Information</h3> <input type="text" id="student-name" placeholder="Student Name" readonly > <input type="text" id="matric-number" placeholder="Matric Number" readonly > </div> <div class="dashboard-card"> <h3>Scan Attendance QR Code</h3> <div id="qr-reader"></div> <p id="scan-result"> Scan result will appear here. </p> <button onclick="startAttendance()"> Start Scanner </button> <button onclick="stopAttendance()"> Stop Scanner </button> </div> <div class="dashboard-card"> <h3>Attendance Information</h3> <p id="student-attendance-status"> Attendance status will appear here. </p> <p id="student-attendance-total"> Total Attendance: 0 </p> </div> <button onclick="logout()">Logout</button> </section> <!-- LECTURER DASHBOARD --> <section id="lecturer-dashboard" hidden> <h2>Lecturer Dashboard</h2> <div class="dashboard-card"> <h3>Generate Attendance QR Code</h3> <input type="text" id="course-name" placeholder="Enter Course Name" > <button onclick="generateQR()"> Generate QR Code </button> <div id="qr-code"></div> </div> <div class="dashboard-card"> <h3>Attendance Records</h3> <button onclick="viewAttendance()"> View Attendance </button> <p> Total Students: <span id="total-students">0</span> </p> <div class="table-container"> <table id="attendance-table"> <thead> <tr> <th>Student Name</th> <th>Matric Number</th> <th>Course</th> <th>Date</th> </tr> </thead> <tbody id="attendance-list"></tbody> </table> </div> </div> <button onclick="logout()">Logout</button> </section> <!-- ADMIN DASHBOARD --> <section id="admin-dashboard" hidden> <h2>Admin Dashboard</h2> <div class="dashboard-card"> <h3>System Statistics</h3> <p> Total Students: <span id="admin-students">0</span> </p> <p> Total Lecturers: <span id="admin-lecturers">0</span> </p> <p> Total Attendance Records: <span id="admin-attendance">0</span> </p> </div> <div class="dashboard-card"> <h3>Pending Lecturer Approvals</h3> <button onclick="loadPendingLecturers()"> Load Pending Lecturers </button> <div id="pending-lecturers"></div> </div> <div class="dashboard-card"> <h3>Registered Students</h3> <button onclick="loadStudents()"> Load Students </button> <div id="admin-student-list"></div> </div> <button onclick="logout()">Logout</button> </section> </main> <!-- FOOTER --> <footer> <p> &copy; 2026 KAKUZ Smart Attendance. All Rights Reserved. </p> </footer> <!-- QR SCANNER LIBRARY --> <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script> <!-- QR CODE GENERATOR --> <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script> <!-- FIREBASE APP --> <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script> <!-- FIREBASE AUTHENTICATION --> <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script> <!-- FIREBASE FIRESTORE --> <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script> <!-- MAIN JAVASCRIPT --> <script src="script.js"></script> 
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAKUZ Smart Attendance</title>
+    <link rel="stylesheet" href="style.css">
+</head><body><header>
+    <nav>
+        <h2>KAKUZ</h2>
+        <div>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#login">Login</a>
+        </div>
+    </nav>
+</header><main><section id="home" class="hero">
+    <h1>KAKUZ Smart Attendance</h1>
+    <p>A smarter way to manage student attendance.</p>
+    <button type="button" onclick="showLogin()">Get Started</button>
+</section>
+
+<section id="about">
+    <h2>About Our System</h2>
+    <p>KAKUZ Smart Attendance is a digital attendance management system designed to help educational institutions manage attendance records efficiently.</p>
+
+    <h3>How It Works</h3>
+    <p>Students can scan attendance QR codes.</p>
+    <p>Lecturers can generate QR codes for their classes.</p>
+    <p>Administrators can manage students and lecturers.</p>
+</section>
+
+<section id="login">
+    <h2>Login to Your Account</h2>
+
+    <div class="login-box">
+        <h3>Student Login</h3>
+        <input type="email" id="student-login-id" placeholder="Enter your registered email">
+        <input type="password" id="student-login-password" placeholder="Enter password">
+        <button type="button" onclick="studentLogin()">Student Login</button>
+    </div>
+
+    <div class="login-box">
+        <h3>Lecturer Login</h3>
+        <input type="email" id="lecturer-login-email" placeholder="Enter lecturer email">
+        <input type="password" id="lecturer-login-password" placeholder="Enter password">
+        <button type="button" onclick="lecturerLogin()">Lecturer Login</button>
+    </div>
+
+    <div class="login-box">
+        <h3>Admin Login</h3>
+        <input type="email" id="admin-email" placeholder="Enter admin email">
+        <input type="password" id="admin-password" placeholder="Enter password">
+        <button type="button" onclick="adminLogin()">Admin Login</button>
+    </div>
+
+    <p>Don't have an account?</p>
+    <button type="button" onclick="showRegistration()">Create New Account</button>
+</section>
+
+<section id="registration" hidden>
+    <h2>Create New Account</h2>
+
+    <div class="login-box">
+        <label for="account-type">Account Type</label>
+
+        <select id="account-type">
+            <option value="student">Student</option>
+            <option value="lecturer">Lecturer</option>
+        </select>
+
+        <input type="text" id="register-name" placeholder="Full Name">
+        <input type="text" id="register-id" placeholder="Matric Number / Staff ID">
+        <input type="email" id="register-email" placeholder="Email Address">
+        <input type="text" id="register-department" placeholder="Department">
+        <input type="text" id="register-level" placeholder="Level (Students only)">
+        <input type="password" id="register-password" placeholder="Create Password">
+        <input type="password" id="confirm-password" placeholder="Confirm Password">
+
+        <button type="button" onclick="registerAccount()">Register</button>
+
+        <p id="register-message"></p>
+
+        <button type="button" onclick="showLogin()">Back to Login</button>
+    </div>
+</section>
+
+<section id="student-dashboard" hidden>
+    <h2>Student Dashboard</h2>
+
+    <div class="dashboard-card">
+        <h3>Student Information</h3>
+        <input type="text" id="student-name" placeholder="Student Name" readonly>
+        <input type="text" id="matric-number" placeholder="Matric Number" readonly>
+    </div>
+
+    <div class="dashboard-card">
+        <h3>Scan Attendance QR Code</h3>
+        <div id="qr-reader"></div>
+        <p id="scan-result">Scan result will appear here.</p>
+
+        <button type="button" onclick="startAttendance()">Start Scanner</button>
+        <button type="button" onclick="stopAttendance()">Stop Scanner</button>
+    </div>
+
+    <div class="dashboard-card">
+        <h3>Attendance Information</h3>
+        <p id="student-attendance-status">Attendance status will appear here.</p>
+        <p id="student-attendance-total">Total Attendance: 0</p>
+    </div>
+
+    <button type="button" onclick="logout()">Logout</button>
+</section>
+
+<section id="lecturer-dashboard" hidden>
+    <h2>Lecturer Dashboard</h2>
+
+    <div class="dashboard-card">
+        <h3>Generate Attendance QR Code</h3>
+        <input type="text" id="course-name" placeholder="Enter Course Name">
+        <button type="button" onclick="generateQR()">Generate QR Code</button>
+        <div id="qr-code"></div>
+    </div>
+
+    <div class="dashboard-card">
+        <h3>Attendance Records</h3>
+        <button type="button" onclick="viewAttendance()">View Attendance</button>
+
+        <p>Total Students: <span id="total-students">0</span></p>
+
+        <div class="table-container">
+            <table id="attendance-table">
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Matric Number</th>
+                        <th>Course</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody id="attendance-list"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <button type="button" onclick="logout()">Logout</button>
+</section>
+
+<section id="admin-dashboard" hidden>
+    <h2>Admin Dashboard</h2>
+
+    <div class="dashboard-card">
+        <h3>System Statistics</h3>
+        <p>Total Students: <span id="admin-students">0</span></p>
+        <p>Total Lecturers: <span id="admin-lecturers">0</span></p>
+        <p>Total Attendance Records: <span id="admin-attendance">0</span></p>
+    </div>
+
+    <div class="dashboard-card">
+        <h3>Pending Lecturer Approvals</h3>
+        <button type="button" onclick="loadPendingLecturers()">Load Pending Lecturers</button>
+        <div id="pending-lecturers"></div>
+    </div>
+
+    <div class="dashboard-card">
+        <h3>Registered Students</h3>
+        <button type="button" onclick="loadStudents()">Load Students</button>
+        <div id="admin-student-list"></div>
+    </div>
+
+    <button type="button" onclick="logout()">Logout</button>
+</section>
+
+</main><footer>
+    <p>&copy; 2026 KAKUZ Smart Attendance. All Rights Reserved.</p>
+</footer><script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script src="script.js"></script></body>
+</html>
